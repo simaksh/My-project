@@ -23,8 +23,8 @@ class CustomerPageController extends GetxController {
     isLoading.value = false;
 
     result.fold(
-          (error) => print('Error: $error'),
-          (productList) => products.assignAll(productList),
+      (error) => ('Error: $error'),
+      (productList) => products.assignAll(productList),
     );
   }
 }

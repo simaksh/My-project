@@ -1,5 +1,3 @@
 import 'package:get/get.dart';
 
-class ShopingCartController extends GetxController{
-
-}
+class ShopingCartController extends GetxController {}

@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:untitled121/src/infrastructor/commons/route-name.dart';
 
+
+import '../../../../infrastructure/commons/route-name.dart';
 import '../model/todo-dto.dart';
 import '../repository/signup-repository.dart';
 
@@ -12,7 +13,8 @@ class SignupPageController extends GetxController {
   final TextEditingController lastNameTextController = TextEditingController();
   final TextEditingController userNameTextController = TextEditingController();
   final TextEditingController passwordTextController = TextEditingController();
-  final TextEditingController repeatPasswordTextController = TextEditingController();
+  final TextEditingController repeatPasswordTextController =
+      TextEditingController();
 
   @override
   void onClose() {
@@ -35,8 +37,8 @@ class SignupPageController extends GetxController {
 
     final result = await _signupRepository.signupUser(dto);
     result.fold(
-          (error) => Get.snackbar('Error', error),
-          (data) => Get.toNamed(RouteName.login),
+      (error) => Get.snackbar('Error', error),
+      (data) => Get.toNamed(RouteName.login),
     );
   }
 }

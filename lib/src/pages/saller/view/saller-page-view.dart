@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled121/src/infrastructor/commons/route-name.dart';
+
 import '../controller/saller-page-controller.dart';
 
-class SallerePageView extends StatelessWidget {
-  final SallerPageController controller = Get.put(SallerPageController());
+class SellerPageView extends StatelessWidget {
+  final SellerPageController controller = Get.put(SellerPageController());
   final TextEditingController _searchController = TextEditingController();
 
-  SallerePageView({super.key});
+  SellerPageView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,37 +19,34 @@ class SallerePageView extends StatelessWidget {
           color: Colors.cyan,
         ),
         title: const Text('listProduct'),
-
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-      Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.cyan),
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        child: TextField(
-          controller: _searchController,
-          decoration: InputDecoration(
-            hintText: 'Search...',
-            prefixIcon: IconButton(
-              onPressed: (){},
-              icon: Icon(Icons.search_rounded, color: Colors.cyan),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.cyan),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search...',
+                  prefixIcon: IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.search_rounded, color: Colors.cyan),
+                  ),
+                  border: InputBorder.none,
+                ),
+                onChanged: (value) {
+                  // Add your onChanged logic here
+                },
+              ),
             ),
-            border: InputBorder.none,
           ),
-          onChanged: (value) {
-            // Add your onChanged logic here
-          },
-        ),
-      ),
-    ),
-
-
-  Expanded(
+          Expanded(
             child: _buildTodoList(),
           ),
         ],
@@ -65,7 +62,7 @@ class SallerePageView extends StatelessWidget {
   }
 
   void _showFilterDialog(BuildContext context) {
-    double _minPrice = 0;
+    double _minPrice = 1;
     double _maxPrice = 100;
     List<String> selectedColors = [];
 
@@ -110,9 +107,7 @@ class SallerePageView extends StatelessWidget {
               ),
               actions: [
                 TextButton(
-                  onPressed: () {
-
-                  },
+                  onPressed: () {},
                   child: const Text('اعمال'),
                 ),
                 TextButton(
@@ -127,11 +122,10 @@ class SallerePageView extends StatelessWidget {
     );
   }
 
-
   List<Widget> _buildColorChips(
-      List<String> selectedColors,
-      Function setState,
-      ) {
+    List<String> selectedColors,
+    Function setState,
+  ) {
     final List<String> availableColors = [
       'Red',
       'Blue',
@@ -176,7 +170,7 @@ class SallerePageView extends StatelessWidget {
         return Colors.pinkAccent;
       case 'greenAccent':
         return Colors.greenAccent;
-      case'teal':
+      case 'teal':
         return Colors.teal;
       case 'deepOrangeAccent':
         return Colors.deepOrangeAccent;
@@ -184,6 +178,7 @@ class SallerePageView extends StatelessWidget {
         return Colors.lightGreen;
     }
   }
+
   Widget _buildTodoList() {
     return RefreshIndicator(
       onRefresh: () => controller.getProduct(),
@@ -209,7 +204,7 @@ class SallerePageView extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () => controller.deleteProduct(id:product.id),
+                    onPressed: () => controller.deleteProduct(id: product.id),
                     icon: const Icon(
                       Icons.delete,
                       color: Colors.red,
@@ -229,14 +224,12 @@ class SallerePageView extends StatelessWidget {
                     ),
                   ),
                   Switch(
-
                     value: product.isActive,
                     onChanged: (bool newValue) {
                       controller.toggleTodoStatus(product.id, newValue);
                     },
                     activeColor: Colors.green,
                     inactiveTrackColor: Colors.red,
-
                   ),
                 ],
               ),

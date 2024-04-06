@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled121/src/infrastructor/commons/route-name.dart';
 
+
+import '../../../infrastructure/commons/route-name.dart';
 import '../controller/customer-page-controller.dart';
 
 class CustomerPageView extends GetView<CustomerPageController> {
@@ -16,28 +17,27 @@ class CustomerPageView extends GetView<CustomerPageController> {
       body: Stack(
         children: [
           Obx(
-                () => controller.isLoading.value
+            () => controller.isLoading.value
                 ? const Center(child: CircularProgressIndicator())
                 : ListView.builder(
-              itemCount: controller.products.length,
-              itemBuilder: (context, index) {
-                final product = controller.products[index];
-                return ListTile(
-                  title: Text(product.title),
-                  subtitle: Text(product.description),
-                  trailing: Text('\$${product.price}'),
-                );
-              },
-            ),
+                    itemCount: controller.products.length,
+                    itemBuilder: (context, index) {
+                      final product = controller.products[index];
+                      return ListTile(
+                        title: Text(product.title),
+                        subtitle: Text(product.description),
+                        trailing: Text('\$${product.price}'),
+                      );
+                    },
+                  ),
           ),
           Positioned(
             top: 20,
             right: 20,
             child: GestureDetector(
               onTap: () {
-                Get.toNamed(RouteName.shpingCart);
+                Get.toNamed(RouteName.shopIngCart);
               },
-
               child: const Icon(
                 Icons.shopping_cart,
                 size: 30,
@@ -49,10 +49,10 @@ class CustomerPageView extends GetView<CustomerPageController> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(RouteName.shpingCart);
+          Get.toNamed(RouteName.shopIngCart);
         },
-backgroundColor: Colors.white,
-        child: const Icon(Icons.add_shopping_cart,color:Colors.cyan),
+        backgroundColor: Colors.white,
+        child: const Icon(Icons.add_shopping_cart, color: Colors.cyan),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );

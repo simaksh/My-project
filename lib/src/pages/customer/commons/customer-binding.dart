@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 import '../controller/customer-page-controller.dart';
 
-class CustomerBinding extends Bindings{
+class CustomerBinding extends Bindings {
   @override
-  void dependencies() =>Get.lazyPut(() => CustomerPageController());
+  void dependencies() => Get.lazyPut(() => CustomerPageController());
 }

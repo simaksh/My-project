@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class TodoViewModelCustomer {
   final String id;
   final String title;
@@ -16,5 +14,10 @@ class TodoViewModelCustomer {
   });
 
   factory TodoViewModelCustomer.fromJson(final Map<String, dynamic> json) =>
-    TodoViewModelCustomer(  id:json['id'] , title:json[ 'title'], description:json ['description'], price: json['price'], count:json['count']);
+      TodoViewModelCustomer(
+          id: json['id'],
+          title: json['title'],
+          description: json['description'],
+          price: json['price'],
+          count: json['count']);
 }

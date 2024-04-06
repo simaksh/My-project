@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http;
+
 import 'package:either_dart/either.dart';
+import 'package:http/http.dart' as http;
 
 import '../model/todo-dto.dart';
 
@@ -15,10 +16,8 @@ class SignupRepository {
       );
 
       if (response.statusCode >= 200 && response.statusCode < 400) {
-
         return const Right('User signed up successfully');
       } else {
-
         return Left('Error: ${response.statusCode}');
       }
     } catch (error) {

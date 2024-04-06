@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:untitled121/src/infrastructor/commons/route-name.dart';
+
+import '../../../../infrastructure/commons/route-name.dart';
 
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
@@ -43,7 +44,9 @@ class LoginPageViewState extends State<LoginPageView> {
                     suffixIcon: IconButton(
                       icon: Icon(
                         showPassword ? Icons.visibility : Icons.visibility_off,
-                        color: showPassword ? Colors.cyan : Colors.grey, // Adjust color based on showPassword
+                        color: showPassword
+                            ? Colors.cyan
+                            : Colors.grey, // Adjust color based on showPassword
                       ),
                       onPressed: () {
                         setState(() {
@@ -52,14 +55,19 @@ class LoginPageViewState extends State<LoginPageView> {
                       },
                     ),
                   ),
-                  obscureText: !showPassword, // Toggle obscureText based on showPassword
+                  obscureText:
+                      !showPassword, // Toggle obscureText based on showPassword
                 ),
                 Row(
                   children: [
                     IconButton(
                       icon: Icon(
-                        rememberMe ? Icons.check_box : Icons.check_box_outline_blank,
-                        color: rememberMe ? Colors.cyan: Colors.grey, // Adjust color based on rememberMe
+                        rememberMe
+                            ? Icons.check_box
+                            : Icons.check_box_outline_blank,
+                        color: rememberMe
+                            ? Colors.cyan
+                            : Colors.grey, // Adjust color based on rememberMe
                       ),
                       onPressed: () {
                         setState(() {
@@ -68,20 +76,21 @@ class LoginPageViewState extends State<LoginPageView> {
                       },
                     ),
                     const Text('Remember Me'),
-                    const SizedBox(width: 20),
-                    if (rememberMe)
-                      ElevatedButton(
-                        onPressed: () {
-                          Get.toNamed(RouteName.signup);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green, // Background color of the button
-                        ),
-                        child: const Text(
-                          'Signup',
-                          style: TextStyle(color: Colors.white), // Text color of the button
-                        ),
+                    const SizedBox(width: 320),
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.toNamed(RouteName.signup);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.green, // Background color of the button
                       ),
+                      child: const Text(
+                        'Signup',
+                        style: TextStyle(
+                            color: Colors.white), // Text color of the button
+                      ),
+                    ),
                   ],
                 ),
                 const SizedBox(
@@ -89,14 +98,16 @@ class LoginPageViewState extends State<LoginPageView> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(RouteName.saller);
+                    Get.toNamed(RouteName.customer);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepOrange, // Background color of the button
+                    backgroundColor:
+                        Colors.deepOrange, // Background color of the button
                   ),
                   child: const Text(
                     'Login',
-                    style: TextStyle(color: Colors.white), // Text color of the button
+                    style: TextStyle(
+                        color: Colors.white), // Text color of the button
                   ),
                 ),
               ],

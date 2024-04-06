@@ -4,11 +4,12 @@ import 'dart:convert';
 
 import 'package:either_dart/either.dart';
 
-import 'package:untitled121/src/infrastructor/commons/repository-Url.dart';
 
 
 import 'package:http/http.dart'as http;
 import 'package:untitled121/src/pages/customer/model/todo-view-model-customer.dart';
+
+import '../../../infrastructure/commons/repository-Url.dart';
 
 class CustomerRepository{
   Future<Either<String, List<TodoViewModelCustomer>>> getCustomerProducts() async {

@@ -7,10 +7,10 @@ class TodoDto {
 
   TodoDto(
       {required this.firstName,
-        required this.lastName,
-        required this.userName,
-        required this.password,
-        required this.repeatPassword});
+      required this.lastName,
+      required this.userName,
+      required this.password,
+      required this.repeatPassword});
 
   Map<String, dynamic> toJson() {
     return {

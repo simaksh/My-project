@@ -2,8 +2,7 @@ import 'package:get/get.dart';
 
 import '../controller/shping-cart-contriller.dart';
 
-class ShopingCartBinding extends Bindings{
+class ShopingCartBinding extends Bindings {
   @override
-  void dependencies() =>Get.lazyPut(() => ShopingCartController());
-
+  void dependencies() => Get.lazyPut(() => ShopingCartController());
 }

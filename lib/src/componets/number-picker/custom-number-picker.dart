@@ -9,9 +9,9 @@ class CustomNumberPicker extends StatefulWidget {
     required this.maxValue,
     super.key,
   })  : assert(
-  minValue <= maxValue, 'minValue($minValue) <= maxValue($maxValue)'),
+            minValue <= maxValue, 'minValue($minValue) <= maxValue($maxValue)'),
         assert(minValue <= initialValue && maxValue >= initialValue,
-        'initialValue should be between min and max');
+            'initialValue should be between min and max');
 
   final int initialValue;
   final int minValue;
@@ -34,18 +34,24 @@ class _CustomNumberPickerState extends State<CustomNumberPicker> {
 
   @override
   Widget build(BuildContext context) => Column(
-    children: [
-      IconButton(
-        onPressed: () => increase(),
-        icon: const Icon(Icons.arrow_upward,color: Colors.cyan,),
-      ),
-      Text('$value'),
-      IconButton(
-        onPressed: () => decrease(),
-        icon: const Icon(Icons.arrow_downward,color:Colors.cyan ,),
-      ),
-    ],
-  );
+        children: [
+          IconButton(
+            onPressed: () => increase(),
+            icon: const Icon(
+              Icons.arrow_forward_ios_sharp,
+              color: Colors.cyan,
+            ),
+          ),
+          Text('$value'),
+          IconButton(
+            onPressed: () => decrease(),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: Colors.cyan,
+            ),
+          ),
+        ],
+      );
 
   void increase() {
     if (value + 1 <= widget.maxValue) {

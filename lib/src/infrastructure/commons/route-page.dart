@@ -1,5 +1,6 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:untitled121/src/infrastructor/commons/route-name.dart';
+
+import 'package:untitled121/src/infrastructure/commons/route-name.dart';
 import 'package:untitled121/src/pages/customer/commons/customer-binding.dart';
 import 'package:untitled121/src/pages/customer/view/customer-page-view.dart';
 
@@ -27,20 +28,20 @@ class RoutePage {
       binding: SignupPageBinding(),
     ),
     GetPage(
-        name: RouteName.saller,
-        page: () => SallerePageView(),
+        name: RouteName.seller,
+        page: () => SellerPageView(),
         binding: SellerPageBinding()),
     GetPage(
         name: RouteName.customer,
         page: () => const CustomerPageView(),
         binding: CustomerBinding()),
     GetPage(
-        name: RouteName.addseller,
+        name: RouteName.addSeller,
         page: () => const AddSellerPageView(),
         binding: AddSallerBinding()),
     GetPage(
-        name: RouteName.shpingCart,
-        page: () => const ShopingCartView(),
+        name: RouteName.shopIngCart,
+        page: () => const ShopIngCartView(),
         binding: ShopingCartBinding()),
   ];
 }

@@ -9,13 +9,11 @@ class LoginPageController extends GetxController {
   Future<void> login() async {
     final result = await _homeRepository.login();
     result.fold(
-          (error) => Get.snackbar('Error', error),
-          (data) {
-
+      (error) => Get.snackbar('Error', error),
+      (data) {
         if (data.isEmpty) {
           Get.snackbar('Login Failed', 'Invalid username or password');
         } else {
-
           final userType = data.first.userName;
           if (userType == UserType.seller) {
             Get.toNamed('/seller_page');

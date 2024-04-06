@@ -1,21 +1,13 @@
-
-
-
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:untitled121/src/pages/saller/edit-page-saller/model/edit-todo-saller.dart';
 import 'package:untitled121/src/pages/saller/edit-page-saller/view/edit-page-saller.dart';
 import 'package:untitled121/src/pages/saller/model/todo-view-model-saller.dart';
 
-
-import '../../../infrastructor/commons/route-name.dart';
+import '../../../infrastructure/commons/route-name.dart';
 import '../repository/saller-page-repository.dart';
 
-class SallerPageController extends GetxController {
-  final SallerPageRepository _repository = SallerPageRepository();
+class SellerPageController extends GetxController {
+  final SellerPageRepository _repository = SellerPageRepository();
   RxList<TodoViewModelSaller> product = <TodoViewModelSaller>[].obs;
   RxBool isLoading = true.obs;
   RxBool isRetryMode = false.obs;
@@ -23,21 +15,20 @@ class SallerPageController extends GetxController {
   RxMap<String, bool> isEditLoading = <String, bool>{}.obs;
   RxMap<String, bool> isDeleteLoadingMap = <String, bool>{}.obs;
 
-
   @override
   void onInit() {
     super.onInit();
-   getProduct();
+    getProduct();
   }
 
-  Future<void>getProduct() async {
+  Future<void> getProduct() async {
     try {
       isLoading.value = true;
       final resultOrException = await _repository.getProduct();
       isLoading.value = false;
 
       resultOrException.fold(
-            (exception) {
+        (exception) {
           isRetryMode.value = true;
           Get.showSnackbar(
             GetSnackBar(
@@ -45,8 +36,8 @@ class SallerPageController extends GetxController {
             ),
           );
         },
-            (todosResponse) {
-    product.assignAll(todosResponse);
+        (todosResponse) {
+          product.assignAll(todosResponse);
         },
       );
     } catch (error) {
@@ -59,30 +50,30 @@ class SallerPageController extends GetxController {
   }
 
   Future<void> goToAddPage() async {
-    final result = await Get.toNamed('${RouteName.addseller}');
+    final result = await Get.toNamed(RouteName.addSeller);
     if (result != null) {
       final TodoViewModelSaller newTodo = TodoViewModelSaller.fromJson(result);
-    product.add(newTodo);
+      product.add(newTodo);
     }
   }
 
   Future<void> deleteProduct({
     required String id,
   }) async {
-    isDeleteLoadingMap[id]=true;
+    isDeleteLoadingMap[id] = true;
     await Future.delayed(const Duration(seconds: 2));
 
     final resultOrException = await _repository.deleteProduct(id: id);
-    isDeleteLoadingMap[id]=false;
+    isDeleteLoadingMap[id] = false;
 
     resultOrException.fold(
-          (exception) => Get.showSnackbar(
+      (exception) => Get.showSnackbar(
         GetSnackBar(
           title: exception,
         ),
       ),
-          (right) {
-       product.removeWhere((item) => item.id == id);
+      (right) {
+        product.removeWhere((item) => item.id == id);
       },
     );
   }
@@ -91,24 +82,27 @@ class SallerPageController extends GetxController {
     required TodoViewModelSaller products,
     required bool newValue,
   }) async {
-    isEditLoadingMap[products.id]=false;
+    isEditLoadingMap[products.id] = false;
 
-
-    final EditTodoSellerDto dto = EditTodoSellerDto(description:products.description, count: products.count, price: products.price, title: products.title, id: products.id
-    );
+    final EditTodoSellerDto dto = EditTodoSellerDto(
+        description: products.description,
+        count: products.count,
+        price: products.price,
+        title: products.title,
+        id: products.id);
 
     final resultOrException = await _repository.toggleTodoIsCompleted(dto: dto);
-    isEditLoadingMap[products.id]=true;
-
+    isEditLoadingMap[products.id] = true;
 
     resultOrException.fold(
-          (exception) => Get.showSnackbar(
+      (exception) => Get.showSnackbar(
         GetSnackBar(
           title: exception,
         ),
       ),
-          (newTodo) {
-        final int index = product.indexWhere((element) => element.id == products.id);
+      (newTodo) {
+        final int index =
+            product.indexWhere((element) => element.id == products.id);
         if (index != -1) {
           product[index] = newTodo;
         }
@@ -116,38 +110,40 @@ class SallerPageController extends GetxController {
     );
   }
 
-
-
   void toggleTodoStatus(String productId, bool newValue) {
-    final TodoViewModelSaller products = product.firstWhere((element) => element.id == productId);
-  products.isActive = newValue;
-    }
+    final TodoViewModelSaller products =
+        product.firstWhere((element) => element.id == productId);
+    products.isActive = newValue;
+  }
 
   Future<void> editProduct({
     required TodoViewModelSaller productss,
     required String newTitle,
-
     required String newDescription,
     required double newPrice,
     required double newCount,
   }) async {
     try {
-      isEditLoading [productss.id]=true;
+      isEditLoading[productss.id] = true;
 
       final resultOrException = await _repository.toggleTodoIsCompleted(
-        dto: EditTodoSellerDto(description: productss.description, count: productss.count, price:productss.price, title:productss.title, id: productss.id
-
-        ),
+        dto: EditTodoSellerDto(
+            description: productss.description,
+            count: productss.count,
+            price: productss.price,
+            title: productss.title,
+            id: productss.id),
       );
-      isEditLoading[productss.id]=false;
+      isEditLoading[productss.id] = false;
       resultOrException.fold(
-            (exception) => Get.showSnackbar(
+        (exception) => Get.showSnackbar(
           GetSnackBar(
             title: exception,
           ),
         ),
-            (newTodo) {
-          final int index = product.indexWhere((element) => element.id == productss.id);
+        (newTodo) {
+          final int index =
+              product.indexWhere((element) => element.id == productss.id);
           if (index != -1) {
             product[index] = newTodo;
           }
@@ -163,6 +159,8 @@ class SallerPageController extends GetxController {
   }
 
   Future<void> goToEditPage(TodoViewModelSaller todo) async {
-    await Get.to(() => EditTodoPage(todos:todo,));
+    await Get.to(() => EditTodoPage(
+          todos: todo,
+        ));
   }
 }
